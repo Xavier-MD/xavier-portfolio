@@ -14,7 +14,9 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "tailwindcss": "^3.4.1",
-    "three": "^0.161.0"
+    "three": "^0.161.0",
+    "uuid-by-string": "^4.0.0",
+    "wouter": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
