@@ -1,4 +1,6 @@
+import { Html, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import LandingTextAnimation from './components/landingTextAnimation';
 
 export default function App() {
   return (
@@ -15,6 +17,10 @@ export default function App() {
               far={1000}
             />
             <ambientLight intensity={0.5} />
+            <Html center={true}>
+              <LandingTextAnimation />
+            </Html>
+            <OrbitControls />
           </Canvas>
         </div>
       </div>
