@@ -1,5 +1,12 @@
-import { OrbitControls } from '@react-three/drei';
+import { Center, OrbitControls } from '@react-three/drei';
 import { Canvas, useLoader } from '@react-three/fiber';
+import {
+  Bloom,
+  DepthOfField,
+  EffectComposer,
+  Noise,
+  Vignette
+} from '@react-three/postprocessing';
 import { Suspense } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
@@ -11,21 +18,43 @@ function Model({ modelPath }) {
 export default function App() {
   return (
     <div className='App'>
-      <div className='w-screen h-screen bg-xBlack overflow-hidden'>
-        <Canvas dpr={[1, 2]} shadows={true}>
+      <div className='w-screen h-screen bg-xWhite overflow-hidden'>
+        <Canvas
+          dpr={[1, 2]}
+          shadows={true}
+          eventSource={document.getElementById('root')}
+        >
           <perspectiveCamera
             makeDefault={true}
             resolution={1024}
             fov={75}
-            position={[0, 0, 10]}
+            position={[0, 1, -5]}
             near={0.1}
             far={1000}
-          />
-          <ambientLight intensity={0.5} />
+          >
+            <Suspense fallback={null}>
+              <Center>
+                <Model modelPath={'/assets/models/walkman/scene.gltf'} />
+              </Center>
+            </Suspense>
+          </perspectiveCamera>
+          <ambientLight intensity={4} />
           <OrbitControls />
-          <Suspense fallback={null}>
-            <Model modelPath={'/assets/models/the_thinker/scene.gltf'} />
-          </Suspense>
+          {/* <EffectComposer>
+            <DepthOfField
+              focusDistance={0}
+              focalLength={0.02}
+              bokehScale={2}
+              height={480}
+            />
+            <Bloom
+              luminanceThreshold={0}
+              luminanceSmoothing={0.9}
+              height={300}
+            />
+            <Noise opacity={0.02} />
+            <Vignette eskil={false} offset={0.1} darkness={1.1} />
+          </EffectComposer> */}
         </Canvas>
       </div>
     </div>
