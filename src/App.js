@@ -1,28 +1,32 @@
-import { Html, OrbitControls } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
-import LandingTextAnimation from './components/landingTextAnimation';
+import { OrbitControls } from '@react-three/drei';
+import { Canvas, useLoader } from '@react-three/fiber';
+import { Suspense } from 'react';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+
+function Model({ modelPath }) {
+  const gltf = useLoader(GLTFLoader, modelPath);
+  return <primitive object={gltf.scene} scale={1} />;
+}
 
 export default function App() {
   return (
     <div className='App'>
-      <div className='w-screen h-screen bg-xWhite2 overflow-hidden p-5'>
-        <div className='w-full h-full bg-xBlack rounded-md'>
-          <Canvas dpr={[1, 2]} shadows={true}>
-            <perspectiveCamera
-              makeDefault={true}
-              resolution={1024}
-              fov={75}
-              position={[0, 0, 10]}
-              near={0.1}
-              far={1000}
-            />
-            <ambientLight intensity={0.5} />
-            <Html center={true}>
-              <LandingTextAnimation />
-            </Html>
-            <OrbitControls />
-          </Canvas>
-        </div>
+      <div className='w-screen h-screen bg-xBlack overflow-hidden'>
+        <Canvas dpr={[1, 2]} shadows={true}>
+          <perspectiveCamera
+            makeDefault={true}
+            resolution={1024}
+            fov={75}
+            position={[0, 0, 10]}
+            near={0.1}
+            far={1000}
+          />
+          <ambientLight intensity={0.5} />
+          <OrbitControls />
+          <Suspense fallback={null}>
+            <Model modelPath={'/assets/models/the_thinker/scene.gltf'} />
+          </Suspense>
+        </Canvas>
       </div>
     </div>
   );
