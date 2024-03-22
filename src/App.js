@@ -1,4 +1,4 @@
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useState } from 'react';
 import { useControls } from 'leva';
 import { Canvas } from '@react-three/fiber';
 import { AccumulativeShadows, RandomizedLight, Center, Environment, OrbitControls, Html } from '@react-three/drei';
