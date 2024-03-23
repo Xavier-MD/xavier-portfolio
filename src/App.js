@@ -21,7 +21,7 @@ export default function App() {
     const { roughness } = useControls({ roughness: { value: 1, min: 0, max: 1 } });
     const handleInteraction = () => {
       // Logic to change properties and set state
-      setBallProps({ color: 'blue' });
+      setBallProps({ color: 'purple' });
     };
     return (
       <Center top>
@@ -57,7 +57,7 @@ export default function App() {
           <RandomizedLight amount={10} radius={5} ambient={0.2} position={[5, 5, 2]} bias={0.001} />
         </AccumulativeShadows>
       </group>
-      <Environment preset={'dawn'} />
+      <Environment preset={'city'} />
       <OrbitControls autoRotate autoRotateSpeed={4} enablePan={false} enableZoom={false} minPolarAngle={Math.PI / 2.1} maxPolarAngle={Math.PI / 2.1} />
     </Canvas>
   );
